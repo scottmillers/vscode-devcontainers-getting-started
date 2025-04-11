@@ -140,7 +140,7 @@ If the command is successful you will see the current date and time.  This verif
 
    This is the Dev Container configuration file. 
    - It will use ubuntu-22.04 as the container base image 
-   - It will mount your home directory to a directory in Ubuntu called `host-home-folder`  
+   - It will mount your host machines home directory to a directory in the container called `host-home-folder`
    - It will add two extension to Visual Studio code when you open the container
    - It will add python, the AWS CLI, Ansible and Terraform to the Ubuntu 22.04 base image
 
