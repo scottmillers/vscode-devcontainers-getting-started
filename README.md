@@ -13,7 +13,7 @@ The Visual Studio Dev Containers tutorial specifies Docker as the container tool
 
 [Podman](https://podman.io/) is a free and opensource container tools on your local environment. Podman also has the security advantage of running on windows without requiring administrative priviledges.
 
-These are the steps to use Visual Studio Dev Containers with Podman on Windows 11  
+These are the steps to use Visual Studio Code Development Containers with Podman on Windows 11  
 
 ## Prerequisites
 
@@ -88,7 +88,7 @@ These are the steps to use Visual Studio Dev Containers with Podman on Windows 1
     Mon Mar 31 23:56:15 UTC 2025
     ```
 
-If the command is successful you will see the date as the last item in your console output.  This verifies Podman can run a container successfully.
+If the command is successful you will see the current date and time.  This verifies Podman can run containers.
 
 
 ## Step 3: Configure Visual Studio Code to use Podman instead of Docker
@@ -97,11 +97,11 @@ If the command is successful you will see the date as the last item in your cons
 
 2. Modify VSCode to use Podman for containers.
 
-    In VSCode Go to File->Preferences->Settings and search for `docker`.  The default settings use docker. 
+    In VSCode Go to File->Preferences->Settings and search for `docker`.  The default settings specify docker as the container manager. 
 
     ![alt text](images/settings-original.png)
 
-    Change these for Podman:
+    Change these to use Podman:
 
     ![alt text](images/settings-new.png)
 
@@ -112,7 +112,7 @@ If the command is successful you will see the date as the last item in your cons
 
 2. Clone this repository `https://github.com/scottmillers/vscode-devcontainer-example` to a local directory
 
-3. Open the  `.devcontainer/devcontainer.json`
+3. Open the  `.devcontainer/devcontainer.json` file
 
    ```
    {
@@ -139,29 +139,27 @@ If the command is successful you will see the date as the last item in your cons
    ```
 
    This is the Dev Container configuration file. 
-   - It will use a base ubuntu-22.04 as the container image 
+   - It will use ubuntu-22.04 as the container base image 
    - It will mount your home directory to a directory in Ubuntu called `host-home-folder`  
-   - It will add two extension to Visual Studio code that only added when you open the container
+   - It will add two extension to Visual Studio code when you open the container
    - It will add python, the AWS CLI, Ansible and Terraform to the Ubuntu 22.04 base image
 
   
-   
-   
 4. Start the Dev Container
 
-   Open the command bar by typing Ctrl-Shift-P and search for Dev Containers.  Select `Dev Containers: Rebuild and Reopen in Container`.  
+   Open the Visual Studio Code command bar by typing Ctrl-Shift-P and search for Dev Containers.  Select `Dev Containers: Rebuild and Reopen in Container`.  
    
    The container build will start.  
 
    ![alt text](images/container-build.png)
 
-   The first time this is run it will take a while as it is downloading everything to create your container.  Wait for it to finish building.
+   The first build will take a while as it is downloading everything to create your new container.  Wait for it to finish.
 
-   When it finished you will be able to see the files in VsCode Explorer. Noice that the explorer adds the name of the Dev Container to the root 
+   When it finished you will be able to see the files in VsCode Explorer. Noice that the explorer adds the name of the Dev Container to the root directory
 
     ![alt text](images/vscode-explorer.png)
 
-5. Open a terminal window for Ubuntu 22.04
+5. Open a Ubuntu 22.04 terminal window 
 
    ![alt text](images/vscode-terminal.png)
 
