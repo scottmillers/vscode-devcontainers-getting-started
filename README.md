@@ -3,9 +3,15 @@
 
 [Visual Studio Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) offer a streamlined, consistent, and reproducible development environment by encapsulating all project dependencies and tools within a container, ensuring that developers can work on projects with minimal setup and configuration issues.
 
+What are some benefits of using VS Code Dev Containers?
+- Standard development environments
+- Ease of onboarding new team members
+- Simplified setup for various projects
+- Isolation of your development environment from your local machine
+
 The Visual Studio Dev Containers tutorial specifies Docker as the container tool on your local machine.  Docker Desktop is not free for commercial or government organizations.   [Podman](https://podman.io/) is a free and opensource container tools on your local environment. Podman also has the security advantage of running on windows without requiring administrative priviledges.
 
-This guide walks through the steps to use Visual Studio Dev Containers with Podman on a Windows 11 machine.  
+These are the steps to use Visual Studio Dev Containers with Podman on a Windows 11 machine.  
 
 ## Prerequisites
 
@@ -34,7 +40,8 @@ This guide walks through the steps to use Visual Studio Dev Containers with Podm
 
 ## Step 1. Install Podman
 
-1. Download and install [Podman](https://podman-desktop.io/)
+1. Download and install [Podman Desktop](https://podman-desktop.io/)
+    - Note: The steps below use the command line to intialize and start podman. You can do these [same steps using Podman Desktop](https://podman-desktop.io/docs/installation/windows-install).
 
 2. Initialize Podman 
     
@@ -64,7 +71,7 @@ This guide walks through the steps to use Visual Studio Dev Containers with Podm
 1. Download and run a container image from the RedHat registry
 
     This step will connect to the RedHat registry.  
-    - Note: This will fail if you have a VPN or other network security restrictions that prevent access to the RedHat registry.  Disconnect from VPN to pull down images from the registry.
+    - Note: This will fail if you have a VPN or other network restrictions that prevent access to the RedHat registry.  Disconnect from VPN to pull down images from the registry.
     
     ```
     >podman run ubi8-micro date
@@ -79,7 +86,7 @@ This guide walks through the steps to use Visual Studio Dev Containers with Podm
     Mon Mar 31 23:56:15 UTC 2025
     ```
 
-If the command is successful you will see the date as the last item in your console output.
+If the command is successful you will see the date as the last item in your console output.  This verifies Podman can run a container successfully.
 
 
 ## Step 3. Configure Visual Studio Code to use Podman instead of Docker
