@@ -13,7 +13,7 @@ The Visual Studio Dev Containers tutorial specifies Docker as the container tool
 
 [Podman](https://podman.io/) is a free and opensource container tools on your local environment. Podman also has the security advantage of running on windows without requiring administrative priviledges.
 
-These are the steps to use Visual Studio Dev Containers with Podman on a Windows 11 machine.  
+These are the steps to use Visual Studio Dev Containers with Podman on Windows 11  
 
 ## Prerequisites
 
