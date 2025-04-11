@@ -3,13 +3,15 @@
 
 [Visual Studio Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) offer a streamlined, consistent, and reproducible development environment by encapsulating all project dependencies and tools within a container, ensuring that developers can work on projects with minimal setup and configuration issues.
 
-What are some benefits of using VS Code Dev Containers?
+Why use VS Code Dev Containers?
 - Standard development environments
 - Ease of onboarding new team members
 - Simplified setup for various projects
 - Isolation of your development environment from your local machine
 
-The Visual Studio Dev Containers tutorial specifies Docker as the container tool on your local machine.  Docker Desktop is not free for commercial or government organizations.   [Podman](https://podman.io/) is a free and opensource container tools on your local environment. Podman also has the security advantage of running on windows without requiring administrative priviledges.
+The Visual Studio Dev Containers tutorial specifies Docker as the container tool on your local machine.  Docker Desktop is not free for commercial or government organizations.   
+
+[Podman](https://podman.io/) is a free and opensource container tools on your local environment. Podman also has the security advantage of running on windows without requiring administrative priviledges.
 
 These are the steps to use Visual Studio Dev Containers with Podman on a Windows 11 machine.  
 
@@ -38,7 +40,7 @@ These are the steps to use Visual Studio Dev Containers with Podman on a Windows
         >wsl --install
         ```
 
-## Step 1. Install Podman
+## Step 1: Install Podman
 
 1. Download and install [Podman Desktop](https://podman-desktop.io/)
     - Note: The steps below use the command line to intialize and start podman. You can do these [same steps using Podman Desktop](https://podman-desktop.io/docs/installation/windows-install).
@@ -66,7 +68,7 @@ These are the steps to use Visual Studio Dev Containers with Podman on a Windows
     Machine "podman-machine-default" started successfully
     ```
 
-## Step 2. Test Podman Install
+## Step 2: Test Podman Install
 
 1. Download and run a container image from the RedHat registry
 
@@ -89,7 +91,7 @@ These are the steps to use Visual Studio Dev Containers with Podman on a Windows
 If the command is successful you will see the date as the last item in your console output.  This verifies Podman can run a container successfully.
 
 
-## Step 3. Configure Visual Studio Code to use Podman instead of Docker
+## Step 3: Configure Visual Studio Code to use Podman instead of Docker
 
 1. Open Visual Studio Code
 
@@ -104,47 +106,82 @@ If the command is successful you will see the date as the last item in your cons
     ![alt text](images/settings-new.png)
 
 
-## Step 4. Test a Development Container
+## Step 4:  Build you Development Container
 
 1. Open Visual Studio Code 
 
-2. Clone the test repository `https://github.com/TX-DSHS/Cloud_Migration` to a local directory
+2. Clone this repository `https://github.com/scottmillers/vscode-devcontainer-example` to a local directory
 
-3. Open the `devcontainer.json` file
+3. Open the  `.devcontainer/devcontainer.json`
 
-    ![alt text](images/vscode-devcontainer.png)
+   ```
+   {
+    "name": "vscode-devcontainer-example",
+    "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
+    "mounts": [
+        "source=${localEnv:HOME}${localEnv:USERPROFILE},target=/host-home-folder,type=bind,consistency=cached"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "streetsidesoftware.code-spell-checker",
+                "bierner.github-markdown-preview"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {},
+        "ghcr.io/devcontainers/features/aws-cli:1": {},
+        "ghcr.io/devcontainers-extra/features/ansible:2": {},
+        "ghcr.io/devcontainers/features/terraform:1": {}
+    }
+   }
+   ```
 
-   This files show the Dev Container will run Ubuntu 22.04.  It will have add two Visual Studio extensions.  More importantly it will includes python, the AWS CLI, Ansible and Terraform as features. These will be installed on the Ubuntu 22.04 operating system.
+   This is the Dev Container configuration file. 
+   - It will use a base ubuntu-22.04 as the container image 
+   - It will mount your home directory to a directory in Ubuntu called `host-home-folder`  
+   - It will add two extension to Visual Studio code that only added when you open the container
+   - It will add python, the AWS CLI, Ansible and Terraform to the Ubuntu 22.04 base image
 
-   This means that anyone who starts the dev container will have python, the AWS CLI, Ansible and Terraform already installed on Ubuntu.
+  
    
    
 4. Start the Dev Container
 
    Open the command bar by typing Ctrl-Shift-P and search for Dev Containers.  Select `Dev Containers: Rebuild and Reopen in Container`.  
    
-   A container build will start.  
+   The container build will start.  
 
    ![alt text](images/container-build.png)
 
-   The first time this is run it will take a while as it is downloading everything to create your container.
+   The first time this is run it will take a while as it is downloading everything to create your container.  Wait for it to finish building.
+
+   When it finished you will be able to see the files in VsCode Explorer. Noice that the explorer adds the name of the Dev Container to the root 
+
+    ![alt text](images/vscode-explorer.png)
 
 5. Open a terminal window for Ubuntu 22.04
 
-   When it finished you will be able to see the files in Explorer.
-
-   ![alt text](images/vscode-explorer.png)
-
-   Open a Terminal windows
-
    ![alt text](images/vscode-terminal.png)
 
-   Verify that Python and AWS are installed.
+6.  Verify that Python and AWS are installed.
 
-   ![alt text](images/vscode-terminal-bash.png)
+   
+    ![alt text](images/ubuntu-verify-features.png)
 
+7. Run the Python code
 
-## (Optional)  Step 5 Add or remove Dev Containers features
+    ![alt text](images/ubuntu-run-python.png)
+
+8. Verify you can see your home folder content within the container
+
+    The Dev Container mounts the home folder.  This allows you to access your host operating system files from within the container.
+    
+
+    ![alt text](images/ubuntu-home-folder.png)
+
+## (Optional)  Step 5: Add or remove Dev Containers features
 
 1. Add or remove features in Visual Studio code
 
@@ -154,11 +191,11 @@ If the command is successful you will see the date as the last item in your cons
 
     Follow the prompts and select from the list of features.
 
-    
-## References
+    ![alt text](images/devcontainer-feature-list.png)
 
-How to run Podman on Windows
-https://github.com/containers/podman/blob/main/docs/tutorials/podman-for-windows.md
+    Once you have selected your features the Dev Container will be rebuild.
 
-Here is how to modify the docker path
-https://code.visualstudio.com/remote/advancedcontainers/docker-options
+## (Optional)  Step 6: Cloning your repository into WSL or a Dev Volume  
+
+You can [improve the disk performance](https://code.visualstudio.com/remote/advancedcontainers/improve-performance) by either storing your source in the WSL 2 filesystem or cloning your repository in a container volume.  
+
