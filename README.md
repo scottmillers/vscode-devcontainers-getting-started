@@ -1,4 +1,4 @@
-# Using Visual Studio Dev Containers
+# Getting Started with Visual Studio Dev Containers
 
 
 [Visual Studio Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) offer a streamlined, consistent, and reproducible development environment by encapsulating all project dependencies and tools within a container, ensuring that developers can work on projects with minimal setup and configuration issues.
