@@ -6,14 +6,15 @@
 Why use VS Code Dev Containers?
 - Standard development environments
 - Ease of onboarding new team members
-- Simplified setup for various projects
+- Simplified setup for various tools and projects
 - Isolation of your development environment from your local machine
+- More secure than installing developer tools on your local machine
 
 The Visual Studio Dev Containers tutorial specifies Docker as the container tool on your local machine.  Docker Desktop is not free for commercial or government organizations.   
 
 [Podman](https://podman.io/) is a free and opensource container tools on your local environment. Podman also has the security advantage of running on windows without requiring administrative priviledges.
 
-These are the steps to use Visual Studio Code Development Containers with Podman on Windows 11  
+These are the steps to setup and use Visual Studio Code Development Containers with Podman on Windows 11  
 
 ## Prerequisites
 
