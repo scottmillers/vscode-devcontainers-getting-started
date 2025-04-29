@@ -69,6 +69,8 @@ These are the steps to setup and use Visual Studio Code Development Containers w
     Machine "podman-machine-default" started successfully
     ```
 
+    **Note**: Docker desktop runs as root by default.  Podman runs rootless by default.  Some products like `terraform login` will not work unless the container is running as root.  If you run into issue try running as root and see if that fixes the problem.
+
 ## Step 2: Test Podman Install
 
 1. Download and run a container image from the RedHat registry
